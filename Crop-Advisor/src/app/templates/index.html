@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CROP RECOMMENDATION SYSTEM</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        header {
+            background-color: #2c6e49;
+            text-align: center;
+            padding: 40px;
+            color: white;
+            font-size: 36px;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .form-container div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #3b6f36;
+        }
+
+        input {
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #3b6f36;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #1b4d27;
+            outline: none;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #555;
+            margin-top: -15px;
+        }
+
+        .ideal-range {
+            font-size: 14px;
+            color: #3b6f36;
+            font-style: italic;
+        }
+
+        .submit-btn {
+            background-color: #4e7c1f;
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .submit-btn:hover {
+            background-color: #2d4f19;
+        }
+
+        .loading {
+            text-align: center;
+            font-size: 20px;
+            color: #8b4513;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .result {
+            background-color: #e6ffe6;
+            padding: 25px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 40px;
+            color: #2e8b57;
+            display: none;
+        }
+
+        .result h3 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c6e49;
+            text-transform: uppercase;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #2c6e49;
+            color: white;
+            font-size: 16px;
+            margin-top: 40px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .form-container {
+                grid-template-columns: 1fr;
+            }
+            .form-container div {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        CROP RECOMMENDATION SYSTEM
+    </header>
+
+    <div class="container">
+        <div class="form-container">
+            <div>
+                <label for="nitrogen">NITROGEN (N)</label>
+                <input type="number" id="nitrogen" name="nitrogen" required>
+                <div class="description">Range: 0 - 100</div>
+                <div class="ideal-range">Ideal Range: 40 - 60</div>
+            </div>
+            <div>
+                <label for="phosphorus">PHOSPHORUS (P)</label>
+                <input type="number" id="phosphorus" name="phosphorus" required>
+                <div class="description">Range: 0 - 100</div>
+                <div class="ideal-range">Ideal Range: 20 - 50</div>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <div>
+                <label for="potassium">POTASSIUM (K)</label>
+                <input type="number" id="potassium" name="potassium" required>
+                <div class="description">Range: 0 - 100</div>
+                <div class="ideal-range">Ideal Range: 30 - 60</div>
+            </div>
+            <div>
+                <label for="temperature">TEMPERATURE (°C)</label>
+                <input type="number" id="temperature" name="temperature" required>
+                <div class="description">Range: 0 - 50°C</div>
+                <div class="ideal-range">Ideal Range: 20 - 30°C</div>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <div>
+                <label for="humidity">HUMIDITY (%)</label>
+                <input type="number" id="humidity" name="humidity" required>
+                <div class="description">Range: 0 - 100%</div>
+                <div class="ideal-range">Ideal Range: 60 - 80%</div>
+            </div>
+            <div>
+                <label for="ph">SOIL pH</label>
+                <input type="number" id="ph" name="ph" required>
+                <div class="description">Range: 4.0 - 8.0</div>
+                <div class="ideal-range">Ideal Range: 6.0 - 7.0</div>
+            </div>
+        </div>
+
+        <div class="form-container">
+            <div>
+                <label for="rainfall">RAINFALL (MM)</label>
+                <input type="number" id="rainfall" name="rainfall" required>
+                <div class="description">Range: 0 - 3000mm</div>
+                <div class="ideal-range">Ideal Range: 800 - 1500mm</div>
+            </div>
+        </div>
+
+        <button class="submit-btn" onclick="submitData()">GET RECOMMENDED CROP</button>
+
+        <div class="loading" id="loading">Processing...</div>
+
+        <div class="result" id="result">
+            <h3 id="crop-name"></h3>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 Crop Recommendation System
+    </footer>
+
+    <script>
+        function submitData() {
+            const nitrogen = document.getElementById('nitrogen').value;
+            const phosphorus = document.getElementById('phosphorus').value;
+            const potassium = document.getElementById('potassium').value;
+            const temperature = document.getElementById('temperature').value;
+            const humidity = document.getElementById('humidity').value;
+            const ph = document.getElementById('ph').value;
+            const rainfall = document.getElementById('rainfall').value;
+
+            // Validate inputs
+            if (!nitrogen || !phosphorus || !potassium || !temperature || !humidity || !ph || !rainfall) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            document.getElementById("loading").style.display = "block"; // Show loading
+            document.getElementById("result").style.display = "none"; // Hide previous results
+
+            fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    nitrogen: parseFloat(nitrogen),
+                    phosphorus: parseFloat(phosphorus),
+                    potassium: parseFloat(potassium),
+                    temperature: parseFloat(temperature),
+                    humidity: parseFloat(humidity),
+                    ph: parseFloat(ph),
+                    rainfall: parseFloat(rainfall)
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("crop-name").innerText = data.predicted_crop.toUpperCase();
+                document.getElementById("result").style.display = "block";
+            })
+            .catch(error => {
+                alert("Error in prediction: " + error);
+            })
+            .finally(() => {
+                document.getElementById("loading").style.display = "none";
+            });
+        }
+    </script>
+</body>
+</html>
